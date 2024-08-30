@@ -1,7 +1,5 @@
 FROM bde2020/spark-base:3.3.0-hadoop3.3
 
-LABEL maintainer="Gezim Sejdiu <g.sejdiu@gmail.com>, Giannis Mouchakis <gmouchakis@gmail.com>"
-
 COPY worker.sh /
 
 RUN wget https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-aws/3.3.2/hadoop-aws-3.3.2.jar \
