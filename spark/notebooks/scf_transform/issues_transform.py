@@ -32,7 +32,6 @@ def select_columns(df: DataFrame) -> DataFrame:
         col("updated_at"),
         col("status"),
         col("summary"),
-        col("description"),
         col("lat").alias("latitude"),
         col("lng").alias("longitude"),
         col("address").alias("issue_address"),
@@ -67,8 +66,12 @@ def transform_data(spark: SparkSession, file_path: str) -> DataFrame:
     df = select_columns(df)
     df = rename_columns(df)
     df = convert_data_types(df)
+    df = drop_non_integer_rows(df)
     df.printSchema()
     return df
+
+def drop_non_integer_rows(df: DataFrame) -> DataFrame:
+    return df.filter(col('id').cast('int').isNotNull())
 
 def save_to_csv(df: DataFrame, output_path: str):
     df.write.csv(output_path, header=True, mode="overwrite")

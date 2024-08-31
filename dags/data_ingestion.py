@@ -36,7 +36,7 @@ def get_SCF():
 
     transform_issues = DockerOperator(
         task_id ='transform_issues',
-        image='airflow/issues-transformation',
+        image='airflow/issues---transformation',
         container_name='transform--issues',
         api_version='auto',
         auto_remove=True,
@@ -75,7 +75,6 @@ def get_SCF():
                 sqlalchemy.Column('updated_at', sqlalchemy.DateTime),
                 sqlalchemy.Column('issue_status', sqlalchemy.String),
                 sqlalchemy.Column('issue_summary', sqlalchemy.Text),
-                sqlalchemy.Column('issue_description', sqlalchemy.Text),
                 sqlalchemy.Column('latitude', sqlalchemy.Float),
                 sqlalchemy.Column('longitude', sqlalchemy.Float),
                 sqlalchemy.Column('issue_address', sqlalchemy.String),
