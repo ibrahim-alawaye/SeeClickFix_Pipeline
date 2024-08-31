@@ -11,7 +11,7 @@ path = '/usr/local/airflow/.env'
 load_dotenv()
 
 base_url = os.getenv("BASE_URL")
-max_pages = int(os.getenv("MAX_PAGES", 20))
+max_pages = int(os.getenv("MAX_PAGES", 5))
 Bucket_name = os.getenv('BUCKET_NAME')
 
 
@@ -84,3 +84,10 @@ def get_scf_data(base_url, max_pages):
     )
     print(f"Data uploaded successfully to MinIO as '{objw.object_name}'")
     return f'{objw.object_name}'
+
+def _get_transformed_data(path):
+    path="scf-lakehouse/SeeClickFix_Raw/issues_transformed"
+    client = minio_client()
+    objects = client.list_objects(f'scf-lakehouse', prefix='SeeClickFix_Raw/issues_transformed', recursive=True)
+    csv_file = [obj for obj in objects if obj.object_name.endswith('.csv')][0]
+    return f's3://{csv_file.bucket_name}/{csv_file.object_name}'

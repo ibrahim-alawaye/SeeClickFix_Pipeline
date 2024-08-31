@@ -11,7 +11,7 @@ def initialize_spark(app_name: str) -> SparkSession:
         .appName(app_name) \
         .config("fs.s3a.access.key", "minio") \
         .config("fs.s3a.secret.key", "minio456") \
-        .config("fs.s3a.endpoint", "http://172.19.0.5:9000") \
+        .config("fs.s3a.endpoint", "http://172.19.0.2:9000") \
         .config("fs.s3a.connection.ssl.enabled", "false") \
         .config("fs.s3a.path.style.access", "true") \
         .config("fs.s3a.attempts.maximum", "1") \
@@ -75,7 +75,7 @@ def save_to_csv(df: DataFrame, output_path: str):
 
 if __name__ == "__main__":
 
-    issues_transformed = "issues_transformed.csv"
+    issues_transformed = "issues_transformed"
     file_path ="s3a://scf-lakehouse/SeeClickFix_Raw/issues.json"
     output_path = f"s3a://scf-lakehouse/SeeClickFix_Raw/{issues_transformed}"
 
