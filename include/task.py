@@ -7,11 +7,11 @@ from minio import Minio
 from io import BytesIO
 
 # Load environment variables
-path = '/workspaces/SeeClickFix_Pipeline/.env'
+path = '/usr/local/airflow/.env'
 load_dotenv()
 
 base_url = os.getenv("BASE_URL")
-max_pages = int(os.getenv("MAX_PAGES", 5))
+max_pages = int(os.getenv("MAX_PAGES", 20))
 Bucket_name = os.getenv('BUCKET_NAME')
 
 
